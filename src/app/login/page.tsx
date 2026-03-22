@@ -3,7 +3,8 @@
 import { useState, useTransition } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Compass, Loader2, Lock } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
+import { Logo } from "../../components/layout/header";
 
 /**
  * Admin login page — not linked from anywhere publicly.
@@ -55,13 +56,10 @@ export default function LoginPage() {
 
       <div className="glass rounded-2xl p-8 w-full max-w-sm">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center mb-4">
-            <Compass size={20} className="text-white" />
+          <div className="w-48 h-48 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
+            <Logo className="text-white" />
           </div>
           <h1 className="text-lg font-bold text-white">Admin Access</h1>
-          <p className="text-xs text-neutral-500 mt-1">
-            TravelingBeku CMS
-          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

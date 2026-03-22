@@ -30,7 +30,7 @@ bucket_name = "travellingbeku-content"
 #   R2_PUBLIC_URL        — Public bucket URL (e.g. https://pub-xxx.r2.dev)
 
 [vars]
-NEXT_PUBLIC_SITE_URL = "www.travelingbeku.com"
+NEXT_PUBLIC_SITE_URL = "https://www.travelingbeku.com"
 AUTH_TRUST_HOST = "true"
 
 # ── Local dev bindings (wrangler dev) ───────────────────
