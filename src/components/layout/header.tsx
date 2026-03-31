@@ -30,19 +30,17 @@ export function Header() {
         <nav className="flex items-center gap-6">
           <Link
             href="/"
-            className="text-sm text-neutral-400 hover:text-white transition-colors"
+            className="text-sm hover:text-black transition-colors"
           >
             Home
           </Link>
-
-          <AuthButton />
-
           <Link
             href="/blogs"
-            className="text-sm px-4 py-2 rounded-lg bg-orange-500/10 text-orange-400 border border-orange-500/20 hover:bg-orange-500/20 transition-colors font-medium"
+            className="text-sm px-4 py-2 rounded-lg transition-colors font-medium hover:text-black"
           >
-            Blogs →
+            Blogs
           </Link>
+          <AuthButton />
         </nav>
       </div>
     </header>
