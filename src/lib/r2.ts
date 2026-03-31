@@ -13,10 +13,12 @@ import type { BlogPost, BlogPostIndex, BlogPostMeta } from "@/types";
  */
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-const getBucket = (): R2Bucket => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getBucket = (): any => {
   try {
     const { env } = getCloudflareContext();
-    const bucket = (env as Record<string, unknown>).R2_BUCKET as R2Bucket | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const bucket = (env as Record<string, any>).R2_BUCKET;
     if (bucket && typeof bucket.get === "function") {
       return bucket;
     }

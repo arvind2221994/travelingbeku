@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // SSR on Cloudflare Workers via @opennextjs/cloudflare
   // Do NOT use output: 'export' — we need SSR for R2 data fetching
-  runtime: 'edge',
+  // Note: Edge runtime is set per-route via `export const runtime = 'edge'`
   images: {
     // Allow R2 public bucket URL for next/image
     remotePatterns: [
