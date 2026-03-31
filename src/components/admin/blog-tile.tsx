@@ -86,7 +86,7 @@ export function BlogTile({ post }: BlogTileProps) {
         <div className="flex items-center gap-2">
           <Link
             href={`/admin/edit/${post.id}`}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-white/5 text-neutral-300 hover:bg-white/10 hover:text-white transition-colors font-medium"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-white/5 text-neutral-300 hover:text-black transition-colors font-medium"
           >
             <Edit2 size={11} />
             Edit
@@ -96,7 +96,7 @@ export function BlogTile({ post }: BlogTileProps) {
             <Link
               href={`/blogs/${post.slug}`}
               target="_blank"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-white/5 text-neutral-300 hover:bg-white/10 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-white/5 text-neutral-300 hover:text-black transition-colors"
             >
               <ExternalLink size={11} />
               View
@@ -106,11 +106,10 @@ export function BlogTile({ post }: BlogTileProps) {
           <button
             onClick={handleDelete}
             disabled={isPending}
-            className={`ml-auto flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg transition-colors font-medium ${
-              confirming
-                ? "bg-red-500/20 text-red-400 hover:bg-red-500/30 border border-red-500/30"
-                : "bg-white/5 text-neutral-500 hover:bg-red-500/10 hover:text-red-400"
-            } disabled:opacity-50`}
+            className={`ml-auto flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg transition-colors font-medium ${confirming
+              ? "bg-red-500/20 text-red-400 hover:bg-red-500/30 border border-red-500/30"
+              : "bg-white/5 text-neutral-500 hover:bg-red-500/10 hover:text-red-400"
+              } disabled:opacity-50`}
           >
             {isPending ? (
               <Loader2 size={11} className="animate-spin" />

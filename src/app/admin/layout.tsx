@@ -9,7 +9,7 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  
+
   if (!session?.user) redirect("/login");
 
   return (
@@ -18,20 +18,18 @@ export default async function AdminLayout({
       <header className="border-b border-white/8 bg-neutral-900/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <span className="text-sm font-semibold text-orange-400 tracking-wide">
-              ✈ Admin CMS
-            </span>
+
             <nav className="flex items-center gap-4">
               <Link
                 href="/admin"
-                className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-sm text-blue transition-colors"
               >
                 <LayoutDashboard size={13} />
                 Dashboard
               </Link>
               <Link
                 href="/admin/new"
-                className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-sm text-blue transition-colors"
               >
                 <FilePlus size={13} />
                 New Post
@@ -41,7 +39,7 @@ export default async function AdminLayout({
           <form action="/api/auth/signout" method="POST">
             <button
               type="submit"
-              className="flex items-center gap-1.5 text-xs text-neutral-500 hover:text-red-400 transition-colors"
+              className="flex items-center gap-1.5 text-sm text-red hover:text-red-400 transition-colors cursor-pointer"
             >
               <LogOut size={13} />
               Sign out

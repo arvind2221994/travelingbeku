@@ -81,6 +81,24 @@ body {
   color: black;
 }
 
+.text-red {
+  color: red;
+}
+
+.text-red:hover {
+  font-weight: 700;
+}
+
+.text-blue {
+  color: rgb(26, 84, 172);
+  font-weight: 600;
+}
+
+.text-blue:hover {
+  color: black;
+  font-weight: 700;
+}
+
 .text-badge {
   color: var(--color-brand-dim);
   border-color: var(--color-brand-dim);

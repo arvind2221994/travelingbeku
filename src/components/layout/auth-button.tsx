@@ -20,19 +20,11 @@ export function AuthButton() {
       <div className="flex items-center gap-3">
         <Link
           href="/admin"
-          className="flex items-center gap-1.5 text-sm text-orange-400 hover:text-black transition-colors font-medium"
+          className="flex items-center gap-1.5 text-sm text-orange-400 hover:text-black transition-colors font-medium text-blue"
         >
           <User size={14} />
           {session.user.name || "Admin"}
         </Link>
-        <button
-          onClick={() => signOut({ callbackUrl: "/" })}
-          className="flex items-center gap-1 text-xs text-neutral-500 hover:text-black transition-colors"
-          title="Sign out"
-        >
-          Log Out
-          <LogOut size={13} />
-        </button>
       </div>
     );
   }
