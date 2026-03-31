@@ -8,34 +8,30 @@ import type { BlogPost, BlogPostIndex, BlogPostMeta } from "@/types";
 // ─── Native Binding Helper ───────────────────────────────────────────────────
 
 /**
- * Access the R2 bucket directly from the environment.
- * Ensure 'BUCKET' is defined in your wrangler.toml under [[r2_buckets]].
+ * Access the R2 bucket directly from the Cloudflare Worker environment.
+ * Requires [[r2_buckets]] binding = 'R2_BUCKET' in wrangler.toml.
  */
-// @ts-ignore
-import { getRequestContext } from "@opennextjs/cloudflare";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-const getBucket = () => {
-  // 1. Try to get the bucket from the OpenNext Request Context
-  // This works in both Node and Edge runtimes within Cloudflare
+const getBucket = (): R2Bucket => {
   try {
-    const { env } = getRequestContext();
-    if (env?.R2_BUCKET && typeof env.R2_BUCKET.get === 'function') {
-      return env.R2_BUCKET;
+    const { env } = getCloudflareContext();
+    const bucket = (env as Record<string, unknown>).R2_BUCKET as R2Bucket | undefined;
+    if (bucket && typeof bucket.get === "function") {
+      return bucket;
     }
   } catch (e) {
-    // This might fail during local 'next dev' (non-worker) builds
-    console.warn("Context not found, falling back to process.env");
-  }
-
-  // 2. Fallback for standard Wrangler/Worker environments
-  const bucket = (process.env as any).R2_BUCKET;
-  if (bucket && typeof bucket.get === 'function') {
-    return bucket;
+    // Context unavailable during build or static generation
+    console.error("getCloudflareContext() failed:", e);
   }
 
   throw new Error(
-    `R2_BUCKET is not a valid Bucket object. (Type: ${typeof bucket}). ` +
-    "If running locally, ensure you use 'npx wrangler dev --remote'."
+    "R2_BUCKET is not available from the Cloudflare context.\n" +
+    "Checklist:\n" +
+    "1. Ensure you are visiting port 8787 (Wrangler), NOT 3000.\n" +
+    "2. Check that [[r2_buckets]] binding = 'R2_BUCKET' is in wrangler.toml.\n" +
+    "3. Run 'npm run cf-typegen' to update binding definitions.\n" +
+    "4. Ensure this code only runs during a request (not at build time)."
   );
 };
 
@@ -183,7 +179,7 @@ export async function deletePost(id: string): Promise<boolean> {
 
 export async function uploadCoverImage(
   slug: string,
-  buffer: Buffer | ArrayBuffer,
+  buffer: Buffer | ArrayBuffer | Uint8Array,
   mimeType: string
 ): Promise<string> {
   const ext = mimeType.split("/")[1] ?? "jpg";
@@ -193,7 +189,7 @@ export async function uploadCoverImage(
 
 export async function uploadInlineImage(
   filename: string,
-  buffer: Buffer | ArrayBuffer,
+  buffer: Buffer | ArrayBuffer | Uint8Array,
   mimeType: string
 ): Promise<string> {
   const key = `images/inline/${Date.now()}-${filename}`;

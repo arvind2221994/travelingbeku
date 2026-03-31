@@ -21,7 +21,7 @@ export async function uploadEditorImage(formData: FormData) {
   const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
   if (!allowed.includes(file.type)) return { ok: false, error: "Unsupported image type" };
 
-  const buffer = Buffer.from(await file.arrayBuffer());
+  const buffer = new Uint8Array(await file.arrayBuffer());
   const url = await uploadInlineImage(file.name, buffer, file.type);
 
   return { ok: true, url };
